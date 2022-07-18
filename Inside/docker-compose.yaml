@@ -1,0 +1,18 @@
+﻿version: '3'
+services: 
+  inside:
+    image: dmise/inside   #use "image" if we use image instead of dockerfile   or "build" .  (where '.' is current directory)
+    ports:
+    - "7117:443"
+    - "7120:80"
+    environment: 
+      ASPNETCORE_URLS: "https://+;http://+"
+      ASPNETCORE_HTTPS_PORT: "7117"
+      ASPTENCORE_ENVIRONMENT: "Development"
+      # хардкодим пароль, если не получается с сертификатами и секретами
+      ASPNETCORE_Kestrel__Certificates__Default__Password: "InsidePassword"   
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/root/.aspnet/https/Inside.pfx"
+    #volumes:
+      # - .\Secrets\:/root/.aspnet/https/
+
+    container_name: "HOp-hey"
