@@ -8,6 +8,7 @@
 Для теста работоспосбности API используйте гостевого пользователя `{ "username":"Guest", "password":"Guest" }`
 
 # Endpoints: 
+:warning: *Внимание все curl запросы в написанной инструкии -unsecure. (флаг -k). Решаю вопрсо сертификации.*
 ## не использующие jwt token
 ### - /api/inside/login
 **описание:**
@@ -23,7 +24,7 @@
 
 ***curl запрос:***
 ```
-curl -X 'POST' \
+curl -k -X 'POST' \
   'https://localhost:7117/api/inside/login' \
   -H 'accept: text/plain' \
   -H 'Content-Type: application/json' \
@@ -41,7 +42,7 @@ curl -X 'POST' \
 
 **curl запрос:**
 ```
-curl -X 'POST' \
+curl -k -X 'POST' \
   'https://localhost:7117/api/public/message' \
   -H 'accept: text/plain' \
   -H 'Content-Type: application/json' \
@@ -57,7 +58,7 @@ curl -X 'POST' \
 
 **curl запрос:**
 ```
-curl -X 'GET' \
+curl -k  -X 'GET' \
   'https://localhost:7117/api/public/messages' \
   -H 'accept: text/plain'
 ```
@@ -75,7 +76,7 @@ curl -X 'GET' \
 
 :pen: по ТЗ надо было между Bearer и полученным токеном ставть нижнее подчеркивание  (покачто не нашёл эту настройку)
 ```
-curl --location --request POST 'https://localhost:7117/api/inside/message' \
+curl -k  --location --request POST 'https://localhost:7117/api/inside/message' \
 --header 'Authorization: Bearer {JwtTokenString}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
