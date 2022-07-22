@@ -62,7 +62,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+<<<<<<< HEAD
 //app.UseHttpsRedirection();
+=======
+app.UseHttpsRedirection();
+>>>>>>> b2fe
 
 app.UseAuthentication();
 app.UseAuthorization();

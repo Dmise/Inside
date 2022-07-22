@@ -7,7 +7,10 @@ using System.Security.Claims;
 using System.Text;
 using Inside.Services;
 using Microsoft.AspNetCore.Authorization;
+<<<<<<< HEAD
 using System.Security.Cryptography.X509Certificates;
+=======
+>>>>>>> b2fe
 
 namespace Inside.Controllers
 {
@@ -17,7 +20,10 @@ namespace Inside.Controllers
     {
         private readonly InsideDbContext _context;
         private readonly JwtWorker _jwtWorker;
+<<<<<<< HEAD
               
+=======
+>>>>>>> b2fe
 
         public InsideAuth (InsideDbContext context,
                              JwtWorker jwtWorker)
@@ -90,8 +96,12 @@ namespace Inside.Controllers
                     TextOfMessage = dto.TextOfMessage
                 });
                 await _context.SaveChangesAsync();
+<<<<<<< HEAD
                 //return Created("Message was added to Data Base. Text of message {}", dto.TextOfMessage);
                 return Ok($"Message was added to Data Base. Text of message: {dto.TextOfMessage}");
+=======
+                return Created("Message was added to Data Base", dto.TextOfMessage);
+>>>>>>> b2fe
             }
             else
             {
