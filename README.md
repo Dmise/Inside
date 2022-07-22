@@ -76,7 +76,7 @@ curl  -X 'GET' \
 
 :pen: по ТЗ надо было между Bearer и полученным токеном ставть нижнее подчеркивание  (покачто не нашёл эту настройку)
 ```
-curl --location --request POST 'http://localhost:7117/api/inside/message' \
+curl --request POST 'http://localhost:7117/api/inside/message' \
 --header 'Authorization: Bearer {JwtTokenString}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
