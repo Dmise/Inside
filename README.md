@@ -8,6 +8,7 @@
 Для теста работоспосбности API используйте гостевого пользователя `{ "username":"Guest", "password":"Guest" }`
 
 # Endpoints: 
+:warning: Приложеине работает только по HTTP протоколу.  
 ## не использующие jwt token
 ### - /api/inside/login
 **описание:**
@@ -24,12 +25,12 @@
 ***curl запрос:***
 ```
 curl -X 'POST' \
-  'https://localhost:7117/api/inside/login' \
+  'http://localhost:7117/api/inside/login' \
   -H 'accept: text/plain' \
   -H 'Content-Type: application/json' \
   -d '{
-  "username": "string",
-  "password": "string"
+  "username": "Guest",
+  "password": "Guest"
 }'
 ```
 
@@ -42,12 +43,12 @@ curl -X 'POST' \
 **curl запрос:**
 ```
 curl -X 'POST' \
-  'https://localhost:7117/api/public/message' \
+  'http://localhost:7117/api/public/message' \
   -H 'accept: text/plain' \
   -H 'Content-Type: application/json' \
   -d '{
-  "username": "string",
-  "textOfMessage": "string"
+  "username": "Guest",
+  "textOfMessage": "Guest"
 }'
 ```
 
@@ -57,8 +58,8 @@ curl -X 'POST' \
 
 **curl запрос:**
 ```
-curl -X 'GET' \
-  'https://localhost:7117/api/public/messages' \
+curl  -X 'GET' \
+  'http://localhost:7117/api/public/messages' \
   -H 'accept: text/plain'
 ```
 ## использующие jwt token
@@ -75,7 +76,7 @@ curl -X 'GET' \
 
 :pen: по ТЗ надо было между Bearer и полученным токеном ставть нижнее подчеркивание  (покачто не нашёл эту настройку)
 ```
-curl --location --request POST 'https://localhost:7117/api/inside/message' \
+curl --location --request POST 'http://localhost:7117/api/inside/message' \
 --header 'Authorization: Bearer {JwtTokenString}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -105,18 +106,14 @@ curl --location --request POST 'https://localhost:7117/api/inside/message' \
 version: '3'
 services: 
   inside:
-    image: dmise/inside
-    ports:
-    - "7117:443"
-    - "7120:80"
+    image: dmise/inside:http  
+    ports:    
+    - "7117:80"
     environment: 
-      ASPNETCORE_URLS: "https://+;http://+"
-      ASPNETCORE_HTTPS_PORT: "7117"
-      ASPTENCORE_ENVIRONMENT: "Development"
-      # хардкодим пароль, если не получается с сертификатами и секретами
-      ASPNETCORE_Kestrel__Certificates__Default__Password: "InsidePassword"   
-      ASPNETCORE_Kestrel__Certificates__Default__Path: "/root/.aspnet/https/Inside.pfx"
-    container_name: "InsideTestTaskByDmise"
+      ASPNETCORE_URLS: "http://+"      
+      ASPNETCORE_HTTP_PORT: "7117"      
+      ASPTENCORE_ENVIRONMENT: "Development"     
+    container_name: "dmise_inside-http"
 ```
 
 ### 3. Среда разработки
