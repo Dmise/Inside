@@ -6,6 +6,10 @@ using System.Text;
 
 namespace Inside.Services
 {
+    public interface IJwtCreator
+    {
+        
+    }
     public class JwtWorker
     {
         private IConfiguration _config;

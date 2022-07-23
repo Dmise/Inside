@@ -8,6 +8,10 @@ namespace Inside.Data
     public class InsideDbContext : DbContext
     {
         private readonly string _connectionString;
+        public InsideDbContext() : base()
+        {
+
+        }
         public InsideDbContext(DbContextOptions<InsideDbContext> options) : base(options)
         {
 
@@ -15,6 +19,11 @@ namespace Inside.Data
         public InsideDbContext(string connectionString)
         {
             _connectionString = connectionString;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
         }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
