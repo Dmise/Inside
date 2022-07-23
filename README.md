@@ -8,10 +8,7 @@
 Для теста работоспосбности API используйте гостевого пользователя `{ "username":"Guest", "password":"Guest" }`
 
 # Endpoints: 
-<<<<<<< HEAD
-=======
 :warning: *Внимание все curl запросы в написанной инструкии -unsecure. (флаг -k). Решаю вопрсо сертификации.*
->>>>>>> b2fe
 ## не использующие jwt token
 ### - /api/inside/login
 **описание:**
@@ -28,10 +25,7 @@
 ***curl запрос:***
 ```
 <<<<<<< HEAD
-curl -X 'POST' \
-=======
 curl -k -X 'POST' \
->>>>>>> b2fe
   'https://localhost:7117/api/inside/login' \
   -H 'accept: text/plain' \
   -H 'Content-Type: application/json' \
@@ -49,11 +43,7 @@ curl -k -X 'POST' \
 
 **curl запрос:**
 ```
-<<<<<<< HEAD
-curl -X 'POST' \
-=======
 curl -k -X 'POST' \
->>>>>>> b2fe
   'https://localhost:7117/api/public/message' \
   -H 'accept: text/plain' \
   -H 'Content-Type: application/json' \
@@ -69,11 +59,7 @@ curl -k -X 'POST' \
 
 **curl запрос:**
 ```
-<<<<<<< HEAD
-curl -X 'GET' \
-=======
 curl -k  -X 'GET' \
->>>>>>> b2fe
   'https://localhost:7117/api/public/messages' \
   -H 'accept: text/plain'
 ```
@@ -91,11 +77,8 @@ curl -k  -X 'GET' \
 
 :pen: по ТЗ надо было между Bearer и полученным токеном ставть нижнее подчеркивание  (покачто не нашёл эту настройку)
 ```
-<<<<<<< HEAD
-curl --location --request POST 'https://localhost:7117/api/inside/message' \
-=======
+
 curl -k  --location --request POST 'https://localhost:7117/api/inside/message' \
->>>>>>> b2fe
 --header 'Authorization: Bearer {JwtTokenString}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
