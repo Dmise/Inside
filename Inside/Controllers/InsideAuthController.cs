@@ -17,7 +17,7 @@ namespace Inside.Controllers
     {
         private readonly InsideDbContext _context;
         private readonly JwtWorker _jwtWorker;
-              
+        
 
         public InsideAuthController (InsideDbContext context,
                              JwtWorker jwtWorker)
@@ -31,13 +31,13 @@ namespace Inside.Controllers
         [Route("login")]        
         public async Task<IActionResult> Login([FromBody] UserLoginModel userLogin)
         {
-            if (userLogin.Username == String.Empty || userLogin.Password == String.Empty)
+            if (userLogin.name == String.Empty || userLogin.password == String.Empty)
                 throw new ArgumentOutOfRangeException();
 
-            User? currentUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == userLogin.Username);            
+            User? currentUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == userLogin.name);            
             if (currentUser != null)
             {
-                if (currentUser.Password == userLogin.Password)
+                if (currentUser.Password == userLogin.password)
                 {
                     var  token = _jwtWorker.GenerateToken(currentUser);
                     return Ok(token);
@@ -48,17 +48,17 @@ namespace Inside.Controllers
                 }
             }
 
-            return BadRequest($"\"{userLogin.Username}\" not registered in the system. Your request does not handled");
+            return BadRequest($"\"{userLogin.name}\" not registered in the system. Your request does not handled");
         }
 
         [HttpPost]
         [Route("message")]
         public async Task<IActionResult> PostMessage([FromBody] PostMessageModel dto)
         {
-            User? currentUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == dto.Username);
+            User? currentUser = await _context.Users.FirstOrDefaultAsync(u => u.Username == dto.name);
             if (currentUser != null)
             {
-                if (dto.TextOfMessage == "history 10")
+                if (dto.message == "history 10")
                 {
                     var messageCount = _context.Messages.Count();
                     var mes = _context.Messages.ToList();
@@ -90,15 +90,15 @@ namespace Inside.Controllers
                 _context.Messages.Add(new Inside.Data.Message
                 {
                     Username = "Guest",
-                    TextOfMessage = dto.TextOfMessage
+                    TextOfMessage = dto.message
                 });
                 await _context.SaveChangesAsync();
                 //return Created("Message was added to Data Base. Text of message {}", dto.TextOfMessage);
-                return Ok($"Message was added to Data Base. Text of message: {dto.TextOfMessage}");
+                return Ok($"Message was added to Data Base. Text of message: {dto.message}");
             }
             else
             {
-                return BadRequest($"\"{dto.Username}\" not registered in the system. Your request does not handled");
+                return BadRequest($"\"{dto.name}\" not registered in the system. Your request does not handled");
             }
 
         }

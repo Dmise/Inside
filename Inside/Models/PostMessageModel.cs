@@ -2,7 +2,7 @@
 {
     public class PostMessageModel
     {
-        public string Username { get; set; }
-        public string TextOfMessage { get; set; }
+        public string name { get; set; }
+        public string message { get; set; }
     }
 }

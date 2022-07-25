@@ -27,7 +27,7 @@ namespace InsideUnitTests
         public void LoginModel()
         {
             var loginModel = new Inside.Models.UserLoginModel();
-            Assert.Contains(loginModel.Username, loginModel.Password);
+            Assert.Contains(loginModel.name, loginModel.password);
         }
 
         [Fact]
@@ -36,13 +36,13 @@ namespace InsideUnitTests
             // Arrange
             var loginModel_1 = new UserLoginModel
             {
-                Password = "SomePassword",
-                Username = String.Empty
+                password = "SomePassword",
+                name = String.Empty
             };
             var loginModel_2 = new UserLoginModel
             {
-                Password = String.Empty,
-                Username = "AnyUsername"
+                password = String.Empty,
+                name = "AnyUsername"
             };
             var mockContext = new Mock<InsideDbContext>();
             var Jwt = new JwtWorker(_configuration);

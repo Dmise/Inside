@@ -28,8 +28,10 @@ builder.Services.AddTransient<JwtWorker>(); // AddTransient<JwtWorker> ?
 //Adding Authentication 
 builder.Services.AddAuthentication(x =>
 {
+    
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    
 }).AddJwtBearer(o =>
 {
     var Key = Encoding.UTF8.GetBytes(configuration["Jwt:Key"]);
