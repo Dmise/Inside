@@ -17,51 +17,24 @@
 ***тело сообщения:*** 
 `{
     name:       "имя отправителя",
-    message:    "текст сообщение"
+    password:    "пароль"
 }`
 
 ***тело ответа:*** `{ token: "string"}`
 
-***curl запрос:***
+***curl запрос:***  Для удобства копирвоания токена, заворачиваем curl запрос в echo
 ```
-curl -X 'POST' \
+echo "$(curl -X POST \
   'http://localhost:7117/api/inside/login' \
   -H 'accept: text/plain' \
   -H 'Content-Type: application/json' \
   -d '{
-  "username": "Guest",
+  "name": "Guest",
   "password": "Guest"
-}'
+}')"  
+
 ```
 
-### - /api/public/message   [POST]
-**описание:**
-Запись сообщений в БД <ins>только для пользователя</ins> **Guest** (поле name в теле сообщения). Даный API не проверяет jwt токен.
-
-**тело сообщения:** `{ name:       "имя отправителя", message:    "текст сообщение"}`
-
-**curl запрос:**
-```
-curl -X 'POST' \
-  'http://localhost:7117/api/public/message' \
-  -H 'accept: text/plain' \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "username": "Guest",
-  "textOfMessage": "Guest"
-}'
-```
-
-### - /api/public/messages  [GET]
-**описание:**
-Получает лист всех последних сообщений
-
-**curl запрос:**
-```
-curl  -X 'GET' \
-  'http://localhost:7117/api/public/messages' \
-  -H 'accept: text/plain'
-```
 ## использующие jwt token
 
 ### - /api/inside/message [POST]
@@ -80,8 +53,8 @@ curl --request POST 'http://localhost:7117/api/inside/message' \
 --header 'Authorization: Bearer {JwtTokenString}' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "username": "Guest",
-  "textOfMessage": "Guest with jwt token"
+  "name": "Guest",
+  "message": "Guest with jwt token"
 }'
 ```
 **тело ответа:** `{ name: "имя отправителя", message: "текст сообщение" }
