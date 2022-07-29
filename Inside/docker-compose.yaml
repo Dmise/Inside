@@ -1,7 +1,7 @@
 ﻿version: '3'
 services: 
   inside:
-    image: dmise/inside:http   #use "image" if we use image instead of dockerfile   or "build" .  (where '.' is current directory)
+    image: dmise/inside   #use "image" if we use image instead of dockerfile   or "build" .  (where '.' is current directory)
     ports:    
     - "7117:80"
     environment: 
