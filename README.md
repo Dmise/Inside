@@ -79,7 +79,7 @@ curl --request POST 'http://localhost:7117/api/inside/message' \
 version: '3'
 services: 
   inside:
-    image: dmise/inside:http  
+    image: dmise/inside
     ports:    
     - "7117:80"
     environment: 
